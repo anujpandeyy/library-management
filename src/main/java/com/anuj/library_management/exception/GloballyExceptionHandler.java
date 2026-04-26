@@ -35,4 +35,13 @@ public class GloballyExceptionHandler {
         error.put("message",ex.getMessage());
         return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(MemberNotFoundException.class)
+
+    public ResponseEntity<Map<String,String>> globalExceptionHandler(MemberNotFoundException ex){
+        Map<String,String> error = new HashMap<>();
+        error.put("error","Member Not Found Exception");
+        error.put("message",ex.getMessage());
+        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
+    }
 }

@@ -63,8 +63,7 @@ public class Loan {
 
     }
 
-    public Loan(UUID id, Book book, Member member, LocalDate borrowDate, LocalDate dueDate) {
-        this.id = id;
+    public Loan(Book book, Member member, LocalDate borrowDate, LocalDate dueDate) {
         this.book = book;
         this.member = member;
         this.borrowDate = borrowDate;

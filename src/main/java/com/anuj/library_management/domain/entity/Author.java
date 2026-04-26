@@ -55,8 +55,7 @@ public class Author {
 
     }
 
-    public Author(UUID id,String name,String email,Date date_of_birth){
-        this.id = id;
+    public Author(String name,String email,Date date_of_birth){
         this.name = name;
         this.email = email;
         this.date_of_birth = date_of_birth;

@@ -12,6 +12,14 @@ public class Book {
         return id;
     }
 
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -77,13 +85,13 @@ public class Book {
 
     }
 
-    public Book(UUID id, String name, String ISBN, Author author, LocalDate published, int pages) {
-        this.id = id;
+    public Book(String name, String ISBN, Author author, LocalDate published, int pages,boolean isAvailable) {
         this.name = name;
         this.ISBN = ISBN;
         this.author = author;
         this.published = published;
         this.pages = pages;
+        this.isAvailable = isAvailable;
     }
 
     @Column(name = "name",nullable = false)
@@ -95,6 +103,11 @@ public class Book {
     private Author author;
     @Column(name = "published",nullable = false)
     private LocalDate published;
+
+
+
     @Column(name = "pages",nullable = false)
     private int pages;
+    @Column(name = "isAvailable",nullable = false)
+    private boolean isAvailable;
 }

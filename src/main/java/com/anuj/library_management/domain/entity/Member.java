@@ -65,8 +65,7 @@ public class Member {
 
     }
 
-    public Member(UUID id, String name, LocalDate membershipDate, MemberType memberType) {
-        this.id = id;
+    public Member(String name, LocalDate membershipDate, MemberType memberType) {
         this.name = name;
         this.membershipDate = membershipDate;
         this.memberType = memberType;
