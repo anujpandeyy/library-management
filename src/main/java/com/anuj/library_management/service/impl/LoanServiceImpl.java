@@ -11,6 +11,7 @@ import com.anuj.library_management.repository.LoanRepository;
 import com.anuj.library_management.repository.MemberRepository;
 import com.anuj.library_management.service.LoanService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -30,6 +31,7 @@ public class LoanServiceImpl implements LoanService {
         this.loanRepository = loanRepository;
     }
 
+    @Transactional
     @Override
     public Loan borrowBook(UUID bookId,UUID memberId){
         //check book
