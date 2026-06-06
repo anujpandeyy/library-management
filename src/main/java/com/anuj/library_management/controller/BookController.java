@@ -1,7 +1,9 @@
 package com.anuj.library_management.controller;
 
 import com.anuj.library_management.domain.CreateBookRequest;
+import com.anuj.library_management.domain.UpdateBookRequest;
 import com.anuj.library_management.domain.dto.CreateBookRequestDto;
+import com.anuj.library_management.domain.dto.UpdateBookRequestDto;
 import com.anuj.library_management.domain.entity.Author;
 import com.anuj.library_management.domain.entity.Book;
 import com.anuj.library_management.mapper.BookMapper;
@@ -44,4 +46,16 @@ public class BookController {
         return new ResponseEntity<>(book,HttpStatus.OK);
     }
 
+    @PutMapping("/{uuid}")
+    public ResponseEntity<Book> updateBook(@PathVariable UUID uuid,@Valid @RequestBody UpdateBookRequestDto updateBookRequestDto){
+        UpdateBookRequest updateBookRequest = bookMapper.fromDto(uuid,updateBookRequestDto);
+        Book book = bookService.updateBook(updateBookRequest.author_id(),updateBookRequest);
+        return new ResponseEntity<Book>(book,HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> deleteBook(@PathVariable UUID uuid){
+        bookService.deleteBook(uuid);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

@@ -1,7 +1,9 @@
 package com.anuj.library_management.controller;
 
 import com.anuj.library_management.domain.CreateAuthorRequest;
+import com.anuj.library_management.domain.UpdateAuthorRequest;
 import com.anuj.library_management.domain.dto.CreateAuthorRequestDto;
+import com.anuj.library_management.domain.dto.UpdateAuthorRequestDto;
 import com.anuj.library_management.domain.entity.Author;
 import com.anuj.library_management.mapper.AuthorMapper;
 import com.anuj.library_management.service.AuthorService;
@@ -41,6 +43,19 @@ public class AuthorController {
     public ResponseEntity<List<Author>> getAllAuthors(){
         List<Author> authors = authorService.getAllAuthors();
         return ResponseEntity.ok(authors);
+    }
+
+    @PutMapping("/{uuid}")
+    public ResponseEntity<Author> updateAuthor(@PathVariable  UUID uuid, @Valid @RequestBody UpdateAuthorRequestDto updateAuthorRequestDto){
+        UpdateAuthorRequest updateAuthorRequest = authorMapper.fromDto(updateAuthorRequestDto);
+        Author author = authorService.updateAuthor(uuid,updateAuthorRequest);
+        return new ResponseEntity<>(author,HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<List<Void>> deleteAuthor(@PathVariable UUID uuid){
+        authorService.deleteAuthor(uuid);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

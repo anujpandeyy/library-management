@@ -1,6 +1,7 @@
 package com.anuj.library_management.service.impl;
 
 import com.anuj.library_management.domain.CreateMemberRequest;
+import com.anuj.library_management.domain.UpdateMemberRequest;
 import com.anuj.library_management.domain.entity.Member;
 import com.anuj.library_management.exception.MemberNotFoundException;
 import com.anuj.library_management.mapper.MemberMapper;
@@ -35,5 +36,19 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
+    }
+
+    @Override
+    public Member updateMember(UUID uuid, UpdateMemberRequest updateMemberRequest) {
+        Member member = memberRepository.findById(uuid).orElseThrow(()-> new MemberNotFoundException(uuid));
+        member.setName(updateMemberRequest.name());
+        member.setMembershipDate(updateMemberRequest.memberShipDate());
+        member.setMemberType(updateMemberRequest.memberType());
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public void deleteMember(UUID uuid) {
+        memberRepository.deleteById(uuid);
     }
 }

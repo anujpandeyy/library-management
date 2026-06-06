@@ -1,6 +1,8 @@
 package com.anuj.library_management.service;
 
 import com.anuj.library_management.domain.CreateAuthorRequest;
+import com.anuj.library_management.domain.UpdateAuthorRequest;
+import com.anuj.library_management.domain.dto.UpdateAuthorRequestDto;
 import com.anuj.library_management.domain.entity.Author;
 
 import java.util.List;
@@ -10,4 +12,6 @@ public interface AuthorService {
     Author createAuthor(CreateAuthorRequest author);
     Author getAuthorById(UUID uuid);
     List<Author> getAllAuthors();
+    Author updateAuthor(UUID uuid,UpdateAuthorRequest updateAuthorRequest);
+    void deleteAuthor(UUID uuid);
 }

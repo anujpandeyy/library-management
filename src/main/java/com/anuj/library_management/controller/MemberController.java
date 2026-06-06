@@ -2,7 +2,10 @@ package com.anuj.library_management.controller;
 
 
 import com.anuj.library_management.domain.CreateMemberRequest;
+import com.anuj.library_management.domain.UpdateMemberRequest;
 import com.anuj.library_management.domain.dto.CreateMemberRequestDto;
+import com.anuj.library_management.domain.dto.UpdateBookRequestDto;
+import com.anuj.library_management.domain.dto.UpdateMemberRequestDto;
 import com.anuj.library_management.domain.entity.Member;
 import com.anuj.library_management.mapper.AuthorMapper;
 import com.anuj.library_management.mapper.MemberMapper;
@@ -45,6 +48,19 @@ public class MemberController {
     public ResponseEntity<List<Member>> getAllMember(){
         List<Member> memberList = memberService.getAllMembers();
         return new ResponseEntity<>(memberList, HttpStatus.OK);
+    }
+
+    @PutMapping("/{uuid}")
+    public ResponseEntity<Member> updateMember(@PathVariable UUID uuid, @Valid @RequestBody UpdateMemberRequestDto updateBookRequestDto){
+        UpdateMemberRequest updateMemberRequest = memberMapper.fromDto(uuid,updateBookRequestDto);
+        Member member = memberService.updateMember(uuid,updateMemberRequest);
+        return new ResponseEntity<>(member,HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> deleteMember(@PathVariable UUID uuid){
+        memberService.deleteMember(uuid);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

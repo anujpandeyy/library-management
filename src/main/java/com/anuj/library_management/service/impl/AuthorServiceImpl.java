@@ -1,6 +1,7 @@
 package com.anuj.library_management.service.impl;
 
 import com.anuj.library_management.domain.CreateAuthorRequest;
+import com.anuj.library_management.domain.UpdateAuthorRequest;
 import com.anuj.library_management.domain.entity.Author;
 import com.anuj.library_management.exception.AuthorNotFoundException;
 import com.anuj.library_management.mapper.AuthorMapper;
@@ -35,5 +36,19 @@ public class AuthorServiceImpl implements AuthorService {
     @Transactional(readOnly = true)
     public List<Author> getAllAuthors() {
         return authorRepository.findAll();
+    }
+
+    @Override
+    public Author updateAuthor(UUID uuid,UpdateAuthorRequest updateAuthorRequest) {
+        Author author = authorRepository.findById(uuid).orElseThrow(()->new AuthorNotFoundException(uuid));
+        author.setName(updateAuthorRequest.name());
+        author.setEmail(updateAuthorRequest.email());
+        author.setDate_of_birth(updateAuthorRequest.date_of_birth());
+        return authorRepository.save(author);
+    }
+
+    @Override
+    public void deleteAuthor(UUID uuid) {
+        authorRepository.deleteById(uuid);
     }
 }
