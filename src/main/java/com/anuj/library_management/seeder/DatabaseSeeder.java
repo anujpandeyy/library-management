@@ -49,12 +49,18 @@ public class DatabaseSeeder {
             b1.setName("1984");
             b1.setISBN("978-0451524935");
             b1.setAuthor(a1);
+            b1.setPublished(LocalDate.of(1949, 6, 8));
+            b1.setPages(328);
+            b1.setAvailable(true);
             bookRepository.save(b1);
 
             Book b2 = new Book();
             b2.setName("Harry Potter and the Sorcerer's Stone");
             b2.setISBN("978-0590353427");
             b2.setAuthor(a2);
+            b2.setPublished(LocalDate.of(1997, 6, 26));
+            b2.setPages(309);
+            b2.setAvailable(true);
             bookRepository.save(b2);
 
             //Members
@@ -74,7 +80,8 @@ public class DatabaseSeeder {
             Loan loan = new Loan();
             loan.setBook(b1);
             loan.setMember(m1);
-            loan.setBorrowDate(java.time.LocalDate.now());
+            loan.setBorrowDate(LocalDate.now());
+            loan.setDueDate(LocalDate.now().plusDays(14));
             loanRepository.save(loan);
 
             System.out.println("=== Database seeded with sample data ===");
