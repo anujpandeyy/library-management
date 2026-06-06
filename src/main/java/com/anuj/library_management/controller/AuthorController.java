@@ -46,14 +46,15 @@ public class AuthorController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<Author> updateAuthor(@PathVariable  UUID uuid, @Valid @RequestBody UpdateAuthorRequestDto updateAuthorRequestDto){
+    public ResponseEntity<Author> updateAuthor(@PathVariable UUID uuid,
+            @Valid @RequestBody UpdateAuthorRequestDto updateAuthorRequestDto) {
         UpdateAuthorRequest updateAuthorRequest = authorMapper.fromDto(updateAuthorRequestDto);
-        Author author = authorService.updateAuthor(uuid,updateAuthorRequest);
-        return new ResponseEntity<>(author,HttpStatus.CREATED);
+        Author author = authorService.updateAuthor(uuid, updateAuthorRequest);
+        return ResponseEntity.ok(author);
     }
 
     @DeleteMapping("/{uuid}")
-    public ResponseEntity<List<Void>> deleteAuthor(@PathVariable UUID uuid){
+    public ResponseEntity<Void> deleteAuthor(@PathVariable UUID uuid) {
         authorService.deleteAuthor(uuid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

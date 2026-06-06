@@ -47,10 +47,10 @@ public class BookController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<Book> updateBook(@PathVariable UUID uuid,@Valid @RequestBody UpdateBookRequestDto updateBookRequestDto){
-        UpdateBookRequest updateBookRequest = bookMapper.fromDto(uuid,updateBookRequestDto);
-        Book book = bookService.updateBook(updateBookRequest.author_id(),updateBookRequest);
-        return new ResponseEntity<Book>(book,HttpStatus.CREATED);
+    public ResponseEntity<Book> updateBook(@PathVariable UUID uuid, @Valid @RequestBody UpdateBookRequestDto updateBookRequestDto) {
+        UpdateBookRequest updateBookRequest = bookMapper.fromDto(uuid, updateBookRequestDto);
+        Book book = bookService.updateBook(uuid, updateBookRequest);
+        return ResponseEntity.ok(book);
     }
 
     @DeleteMapping("/{uuid}")
