@@ -5,7 +5,9 @@ import com.anuj.library_management.domain.dto.CreateAuthorRequestDto;
 import com.anuj.library_management.domain.dto.CreateMemberRequestDto;
 import com.anuj.library_management.domain.entity.Member;
 import com.anuj.library_management.mapper.MemberMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MemberMapperImpl implements MemberMapper {
     @Override
     public CreateMemberRequest fromDto(CreateMemberRequestDto dto) {
